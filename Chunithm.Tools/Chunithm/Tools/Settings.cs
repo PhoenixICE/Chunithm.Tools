@@ -1,4 +1,5 @@
-﻿using Chunithm.Tools.Interface;
+﻿using Chunithm.Tools.Chunithm.Tools.Validator;
+using Chunithm.Tools.Interface;
 using Chunithm.Tools.Validator;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,10 @@ namespace Chunithm.Tools
                 ["Music&Cue Validator"] = new CueMusicFolderValidator(),
                 ["MusicSort Validator"] = new MusicSortValidator(),
                 ["MusicDuplicator Validator"] = new MusicDuplicatorValidator(),
+            },
+            [OptionSubFolderType.@event] = new Dictionary<string, IFolderValidator>()
+            {
+                ["SurfBoardUI Validator"] = new SurfBoardUIValidator(),
             }
         };
 

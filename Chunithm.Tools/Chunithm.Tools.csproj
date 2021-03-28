@@ -102,13 +102,15 @@
     <Compile Include="Chunithm\Tools\FileType.cs" />
     <Compile Include="Chunithm\Tools\FolderType.cs" />
     <Compile Include="Chunithm\Tools\Interface\IFolderValidator.cs" />
-    <Compile Include="Chunithm\Tools\Validator\MusicSortXML\MusicSort.cs" />
+    <Compile Include="Chunithm\Tools\Validator\SurfBoardUIValidator.cs" />
+    <Compile Include="Chunithm\Tools\Validator\XMLClasses\event.cs" />
+    <Compile Include="Chunithm\Tools\Validator\XMLClasses\MusicSort.cs" />
     <Compile Include="Chunithm\Tools\Option.cs" />
     <Compile Include="Chunithm\Tools\OptionSubFolder.cs" />
     <Compile Include="Chunithm\Tools\OptionSubFolderType.cs" />
     <Compile Include="Chunithm\Tools\PreProcessing.cs" />
     <Compile Include="Chunithm\Tools\Settings.cs" />
-    <Compile Include="Chunithm\Tools\Validator\MusicXML\music.cs" />
+    <Compile Include="Chunithm\Tools\Validator\XMLClasses\music.cs" />
     <Compile Include="InteractiveConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

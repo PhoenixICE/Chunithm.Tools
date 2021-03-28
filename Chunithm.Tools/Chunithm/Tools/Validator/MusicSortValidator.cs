@@ -1,5 +1,5 @@
-﻿using Chunithm.Tools.Interface;
-using Chunithm.Tools.Validator.MusicSortXML;
+﻿using Chunithm.Tools.Validator.XMLClasses;
+using Chunithm.Tools.Interface;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -18,13 +18,13 @@ namespace Chunithm.Tools.Validator
             var log = new List<string>();
             Program.LogInfo("Checking MusicSort.xml Validation...");
             var path = Path.Combine(InteractiveConsole.PreProcessing.Folders[FolderType.A000].FullName, OptionSubFolderType.music.ToString(), _musicSortXML);
-            if (!File.Exists(path))
+            if (!System.IO.File.Exists(path))
             {
                 log.Add("Missing MusicSort.xml in A000 Folder?");
                 return log;
             }
 
-            var xmlStr = File.ReadAllText(path);
+            var xmlStr = System.IO.File.ReadAllText(path);
 
             var serializer = new XmlSerializer(typeof(SerializeSortData));
             using (var reader = new StringReader(xmlStr))
@@ -40,7 +40,7 @@ namespace Chunithm.Tools.Validator
                 }
             }
 
-            var musicSortIds = musicSort.SortList.StringID.Select(x => x.Id.PadLeft(4, '0')).Distinct();
+            var musicSortIds = musicSort.SortList.StringID.Select(x => x.Id.ToString().PadLeft(4, '0')).Distinct();
             var optionMusic = InteractiveConsole.PreProcessing.Options.Where(x => x.Value.OptionSubFolders.ContainsKey(OptionSubFolderType.music)).SelectMany(x => x.Value.OptionSubFolders[OptionSubFolderType.music]?.Select(y => y.DirectoryInfo.Name.Substring(5)));
 
             var optionMusicNotInMusicSort = optionMusic.Except(musicSortIds);

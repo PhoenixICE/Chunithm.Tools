@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -18,6 +17,7 @@ namespace Chunithm.Tools
         public Dictionary<string, Option> Options { get; set; } = new Dictionary<string, Option>();
         public Dictionary<ChuniAppPatchType, ChunAppPatchStatusType> CurrentChuniAppPatches { get; set; } = new Dictionary<ChuniAppPatchType, ChunAppPatchStatusType>();
         public Dictionary<string, string> OptionsSummary { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, Validator.XMLClasses.EventData> Events { get; set; } = new Dictionary<string, Validator.XMLClasses.EventData>();
         public Hashtable Duplicates { get; set; } = new Hashtable();
 
         public PreProcessing(Settings settings)
@@ -271,9 +271,12 @@ namespace Chunithm.Tools
             }
         }
 
+        private object _lock = new object();
+        private object _lock2 = new object();
+
         private List<OptionSubFolder> ProcessoptionTypeFolder(string optionSubFolderPath, OptionSubFolderType optionSubFolderType, DataTable dataTable)
         {
-            var optionSubFolders = new ConcurrentBag<OptionSubFolder>();
+            var optionSubFolders = new List<OptionSubFolder>();
             var directory = new DirectoryInfo(optionSubFolderPath);
             var optionSubFolderDirectories = directory.GetDirectories();
 
@@ -293,7 +296,10 @@ namespace Chunithm.Tools
                 optionSubFolder.XMLFile = xmlFile;
                 ProcessXMLFile(optionSubFolder);
                 optionSubFolder.ParentDirectory = directory;
-                optionSubFolders.Add(optionSubFolder);
+                lock (_lock)
+                {
+                    optionSubFolders.Add(optionSubFolder);
+                }
             });
 
             var row = dataTable.NewRow();
@@ -310,13 +316,16 @@ namespace Chunithm.Tools
         {
             var content = File.ReadAllText(optionSubFolder.XMLFile.FullName);
             optionSubFolder.Contents = content;
-            if (!Duplicates.ContainsKey(content))
+            lock (_lock2)
             {
-                Duplicates.Add(content, optionSubFolder.XMLFile.FullName);
-            }
-            else
-            {
-                optionSubFolder.IsDuplicate = true;
+                if (!Duplicates.ContainsKey(content))
+                {
+                    Duplicates.Add(content, optionSubFolder.XMLFile.FullName);
+                }
+                else
+                {
+                    optionSubFolder.IsDuplicate = true;
+                }
             }
             optionSubFolder.XMLTags.Clear();
             foreach (var regex in Settings.RegexMatch)

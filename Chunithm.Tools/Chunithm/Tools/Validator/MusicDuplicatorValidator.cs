@@ -1,9 +1,9 @@
-﻿using Chunithm.Tools.Validator.MusicXML;
-using Chunithm.Tools.Interface;
+﻿using Chunithm.Tools.Interface;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using System.Linq;
+using Chunithm.Tools.Validator.XMLClasses;
 
 namespace Chunithm.Tools.Validator
 {

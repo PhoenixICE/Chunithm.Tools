@@ -1,21 +1,10 @@
 ﻿using System.Xml.Serialization;
 using System.Collections.Generic;
 
-namespace Chunithm.Tools.Validator.MusicSortXML
+namespace Chunithm.Tools.Validator.XMLClasses
 {
     [XmlRoot(ElementName = "resourceVersion")]
     public class ResourceVersion
-    {
-        [XmlElement(ElementName = "id")]
-        public string Id { get; set; }
-        [XmlElement(ElementName = "str")]
-        public string Str { get; set; }
-        [XmlElement(ElementName = "data")]
-        public string Data { get; set; }
-    }
-
-    [XmlRoot(ElementName = "StringID")]
-    public class StringID
     {
         [XmlElement(ElementName = "id")]
         public string Id { get; set; }
