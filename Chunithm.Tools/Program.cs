@@ -5,7 +5,7 @@ namespace Chunithm.Tools
 {
     class Program
     {
-        public static Version Version = new Version(0, 1, 7, 0);
+        public static Version Version = new Version(0, 1, 8, 0);
         public static string Header = $@"██╗ ██████╗██╗   ██╗██████╗ ██╗  ██╗ ██████╗ ███████╗███╗   ██╗██╗██╗  ██╗
 ██║██╔════╝╚██╗ ██╔╝██╔══██╗██║  ██║██╔═══██╗██╔════╝████╗  ██║██║╚██╗██╔╝
 ██║██║      ╚████╔╝ ██████╔╝███████║██║   ██║█████╗  ██╔██╗ ██║██║ ╚███╔╝ 
@@ -16,6 +16,7 @@ Chunithm.Tools v{Version} (Paradise Only)";
 
         static async Task Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.WriteLine(Header);
             try
             {
