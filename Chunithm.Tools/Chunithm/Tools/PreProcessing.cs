@@ -333,7 +333,7 @@ namespace Chunithm.Tools
                 var capture = Regex.Match(content, regex.Key, RegexOptions.IgnoreCase);
                 if (capture.Success)
                 {
-                    optionSubFolder.XMLTags.Add(capture.Value, bool.Parse(capture.Groups[2].Value) == regex.Value);
+                    optionSubFolder.XMLTags.Add(capture.Value, capture.Groups[2].Value.Equals(regex.Value, StringComparison.InvariantCultureIgnoreCase));
                 }
             }
         }

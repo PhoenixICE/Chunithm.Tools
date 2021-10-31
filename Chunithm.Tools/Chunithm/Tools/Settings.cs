@@ -19,7 +19,7 @@ namespace Chunithm.Tools
 
         public Dictionary<ChuniAppPatchType, List<ChuniAppPatch>> ChuniAppPatches { get; set; }
 
-        public Dictionary<string, bool> RegexMatch { get; set; }
+        public Dictionary<string, string> RegexMatch { get; set; }
 
         [JsonIgnore]
         public Dictionary<OptionSubFolderType, Dictionary<string, IFolderValidator>> DefaultSubFolderValdiator = new Dictionary<OptionSubFolderType, Dictionary<string, IFolderValidator>>()
@@ -41,11 +41,11 @@ namespace Chunithm.Tools
 
         public void SaveSettings()
         {
-            RegexMatch = new Dictionary<string, bool>()
+            RegexMatch = new Dictionary<string, string>()
             {
-                [@"(<alwaysOpen>)(false|true)(<\/alwaysOpen>)"] = true,
-                [@"(<defaultHave>)(false|true)(<\/defaultHave>)"] = true,
-                [@"(<firstLock>)(false|true)(<\/firstLock>)"] = false
+                [@"(<alwaysOpen>)(false|true)(<\/alwaysOpen>)"] = "true",
+                [@"(<defaultHave>)(false|true)(<\/defaultHave>)"] = "true",
+                [@"(<firstLock>)(false|true)(<\/firstLock>)"] = "false"
             };
 
             DefaultFiles = new Dictionary<FileType, ChunithmFile>
